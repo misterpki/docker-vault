@@ -20,12 +20,17 @@ All key=value pairs must be included in the same call.
 
 Example:
     vault kv put my.secrets/dev key1=value1 key2=value2
-
-Adding entries...
 EOF
 
+echo "Adding test secrets"
 vault kv put my.secrets/dev \
 	username=test_user \
 	password=test_password 
+
+echo "Listing test secrets"
+vault kv list my.secrets
+
+echo "Retrieving test secrets"
+vault kv get my.secrets/dev
 
 echo "Complete..."

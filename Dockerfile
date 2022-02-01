@@ -9,7 +9,8 @@ RUN export DEBIAN_FRONTEND='noninteractive' \
     && VAULT=$(readlink -f $(which vault)) \
     && echo "Setting capabilities for vault binary '$VAULT'" \
     && setcap cap_ipc_lock=+ep $VAULT \
-    && setcap -r $VAULT
+    && setcap -r $VAULT \
+    && vault -autocomplete-install
     
 COPY run.sh ./
 CMD ./run.sh
