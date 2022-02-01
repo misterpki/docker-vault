@@ -21,6 +21,8 @@ services:
     build: .
     environment:
       VAULT_ADDR: "http://vault-server:8200"
+    cap_add:
+      - IPC_LOCK
     networks:
       vault-network:
         ipv4_address: 172.21.0.20

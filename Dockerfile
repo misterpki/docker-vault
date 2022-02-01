@@ -6,8 +6,10 @@ RUN export DEBIAN_FRONTEND='noninteractive' \
     && apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main" \
     && apt-get update && apt-get install --reinstall -y vault \
     && rm -rf /var/lib/apt/lists/* \
-    && setcap cap_ipc_lock=+ep $(readlink -f $(which vault)) \
-    && setcap -r /usr/bin/vault
+    && VAULT=$(readlink -f $(which vault)) \
+    && echo "Setting capabilities for vault binary '$VAULT'" \
+    && setcap cap_ipc_lock=+ep $VAULT \
+    && setcap -r $VAULT
     
 COPY run.sh ./
 CMD ./run.sh
