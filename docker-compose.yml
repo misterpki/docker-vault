@@ -1,9 +1,7 @@
-version: "3.8"
-
 services:
   
   vault-server:
-    image: vault:latest
+    image: hashicorp/vault:latest
     ports:
       - "8200:8200"
     environment:
@@ -32,4 +30,3 @@ networks:
     ipam:
       config:
         - subnet: 172.21.0.0/24
-
